@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 from youtube_transcript_api import YouTubeTranscriptApi
 import google.generativeai as genai
 import re
-from googleapiclient.discovery import build
 
 
 app = Flask(__name__)
