@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelliNotes - AI Notes Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .loader {
+            border: 5px solid #f3f3f3; /* Light grey */
+            border-top: 5px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            display: none; /* Initially hidden */
+            margin: 20px auto; /* Center loader */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notes {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .notes h2 {
+            margin-bottom: 10px;
+        }
+
+        .notes p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px auto;
+                padding: 10px;
+            }
+            input[type="submit"] {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IntelliNotes - AI Notes Generator</h1>
+        <form id="youtubeForm" action="/" method="post">
+            <label for="youtube_url">Enter YouTube Video URL</label><br>
+            <input type="text" id="youtube_url" name="youtube_url" required><br><br>
+            <input type="submit" value="Generate Notes"><br><br>
+            <div class="loader" id="loader"></div> <!-- Loader element -->
+            <div id="notesContainer"></div> <!-- Container for generated notes -->
+        </form>
+        {% if notes %}
+            <div class="notes">
+                <h2>Generated Notes</h2>
+                {{ notes | safe }}
+            </div>
+        {% endif %}
+    </div>
+    <script>
+        document.getElementById("youtubeForm").addEventListener("submit", function(event) {
+            // Show loader when form is submitted
+            document.getElementById("loader").style.display = "block";
+            // Hide generated notes container
+            document.getElementById("notesContainer").innerHTML = "";
+        });
+    </script>
+</body>
+</html>
